@@ -3,9 +3,11 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { login } from "@/service/auth";
 import { signIn } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
+import { asynLoginUser } from "@/states/authUser/action";
+import { useRouter } from "next/navigation";
+import { useAppDispatch } from "@/hooks";
 
 type Inputs = {
   email: string;
@@ -13,20 +15,30 @@ type Inputs = {
 };
 
 export default function Form() {
+  const dispatch = useAppDispatch();
+  const router = useRouter();
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get('callbackUrl') || '/';
+  const callbackUrl = searchParams.get("callbackUrl") || "/";
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    const res = await signIn("Credentials", {
-      redirect: false,
-      ...data,
-      callbackUrl,
-    });
-    console.log(res);
+    const { email, password } = data;
+    try {
+      dispatch(asynLoginUser({ email, password }));
+      const res = await signIn("credentials", {
+        redirect: false,
+        ...data,
+        callbackUrl,
+      });
+      console.log({res})
+      router.push("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

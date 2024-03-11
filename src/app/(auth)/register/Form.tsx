@@ -3,7 +3,7 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { register as registerFn } from "@/service/auth";
+// import { register as registerFn } from "@/service/auth";
 
 type Inputs = {
   name: string;
@@ -18,8 +18,8 @@ export default function Form() {
     formState: { errors },
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = async(data) => {
-    const res = await registerFn(data);
-    console.log(res)
+    // const res = await registerFn(data);
+    // console.log(res)
 
   };
 
