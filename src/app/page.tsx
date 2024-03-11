@@ -1,13 +1,14 @@
-import ThreadPreview from "@/components/ThreadPreview";
+import React from "react";
+import ListThreads from "@/components/thread/ListThreads";
+import NewThread from "@/components/thread/NewThread";
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <main className="w-full bg-slate-50 md:pl-10 pt-10">
-      <div className="w-full max-w-3xl flex flex-col gap-5">
-        {Array.from({ length: 10 }).map((_, i) => (
-          <ThreadPreview key={i} />
-        ))}
+    <div>
+      <div className="md:pl-10 mb-10 md:sticky md:top-0 md:pt-10 bg-white px-2 md:px-0">
+        <NewThread />
       </div>
-    </main>
+      <ListThreads />
+    </div>
   );
 }
