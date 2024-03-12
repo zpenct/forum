@@ -1,3 +1,9 @@
+export interface IUser {
+  id: string;
+  name: string;
+  email?: string;
+  avatar: string;
+}
 export interface IThread {
   id: string;
   title: string;
@@ -23,12 +29,8 @@ export interface IComment {
   id: string;
   content: string;
   createdAt: string;
-  owner: {
-    id: string;
-    name: string;
-    avatar: string;
-  };
-  upVotesBy: string[]; 
+  owner: IUser;
+  upVotesBy: string[];
   downVotesBy: string[];
 }
 
@@ -38,12 +40,13 @@ export interface IThreadDetail {
   body: string;
   category: string;
   createdAt: string;
-  owner: {
-    id: string;
-    name: string;
-    avatar: string;
-  };
-  upVotesBy: string[]; 
+  owner: IUser;
+  upVotesBy: string[];
   downVotesBy: string[];
   comments: Comment[];
+}
+
+export interface IUserScore {
+  user: IUser;
+  score: number;
 }
