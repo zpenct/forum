@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import {
   Table,
   TableBody,
@@ -38,6 +37,7 @@ export default function UserTable() {
             name={leaderboard.user.name}
             score={leaderboard.score}
             number={index + 1}
+            key={leaderboard.user.id}
           />
         ))}
       </TableBody>
