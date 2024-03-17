@@ -20,6 +20,8 @@ const handler = NextAuth({
       async authorize(credentials) {
         try {
           const data = await api.login(credentials as LoginParams);
+          console.log({ data });
+          console.log("----end authorize")
           return data;
         } catch (error) {
           console.log(error);
@@ -29,11 +31,17 @@ const handler = NextAuth({
     }),
   ],
   callbacks: {
-    async jwt({token,user,account }) {
+    async jwt({ token, user, account }) {
       if(account?.provider === "credentials") {
           token.accessToken = user
+          console.log({token})
           return token ;
       }
+      // return token
+      // console.log({ token: token.user, user });
+
+      console.log("----end jwt")
+      // return { token, user };
       return token
     },
     async session({
@@ -45,6 +53,8 @@ const handler = NextAuth({
       token: any;
       user: any;
     }) {
+      console.log({ session, token, user });
+      console.log("----end session")
       session.user = token.accessToken as any;
       return session;
     },
