@@ -1,7 +1,8 @@
 import { BASE_URL } from "@/constant";
+import { getSession } from "next-auth/react";
 
 function putAccessToken(token: string) {
-  window.localStorage.setItem("accessToken", token);
+  localStorage.setItem("accessToken", token);
 }
 
 function getAccessToken() {
@@ -9,11 +10,14 @@ function getAccessToken() {
 }
 const api = (() => {
   async function fetchWithAuth(url: string, options: any = {}) {
+    const session = await getSession();
+    console.log("session fethc", session?.user);
     return fetch(url, {
       ...options,
       headers: {
         ...options.headers,
-        Authorization: `Bearer ${getAccessToken()}`,
+        // Authorization: `Bearer ${getAccessToken()}`,
+        Authorization: `Bearer ${session?.user}`,
       },
     });
   }
@@ -76,7 +80,7 @@ const api = (() => {
       message,
       data: { token },
     } = responseJson;
-    putAccessToken(token);
+    // putAccessToken(token);
     if (status !== "success") {
       throw new Error(message);
     }
