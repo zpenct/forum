@@ -4,6 +4,8 @@ import { TiThumbsUp, TiThumbsDown } from "react-icons/ti";
 import { BiComment } from "react-icons/bi";
 import Link from "next/link";
 import { IThread } from "../../../@types";
+import postedDate from "@/lib/utils";
+
 export default function ThreadPreview({ thread }: { thread: IThread }) {
   return (
     <div className="p-3 border-b-[1px] border-slate-300 max-w-[390px] md:max-w-full">
@@ -22,7 +24,7 @@ export default function ThreadPreview({ thread }: { thread: IThread }) {
             <Paragraph className="font-bold text-xs">
               {thread.ownerId}
             </Paragraph>
-            <span className="text-xs text-slate-500"> 10 Menit yang lalu</span>
+            <span className="text-xs text-slate-500">{postedDate(thread.createdAt)}</span>
           </div>
         </div>
       </Link>

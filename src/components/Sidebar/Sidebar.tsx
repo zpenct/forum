@@ -12,7 +12,6 @@ export default function Sidebar() {
       <div className="md:mt-10">
         <ListTrending />
       </div>
-      {/* <Tes/> */}
     </div>
   );
 }

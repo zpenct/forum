@@ -1,3 +1,5 @@
+"use client";
+
 import { GoHome } from "react-icons/go";
 import { GoHomeFill } from "react-icons/go";
 import { MdOutlineLeaderboard } from "react-icons/md";
@@ -28,7 +30,7 @@ export default function Navigation() {
   const authUser = useAppSelector((state) => state.authUser);
 
   return (
-    <div className="flex md:flex-col gap-2 md:my-4 justify-evenly fixed md:static bottom-0 left-0 right-0 bg-slate-200 md:bg-slate-50 p-2 w-full">
+    <div className="z-[100] flex md:flex-col gap-2 md:my-4 justify-evenly fixed md:static bottom-0 left-0 right-0 bg-slate-50 md:bg-slate-50 p-1 w-full">
       {navLink.map((link) => (
         <Link
           key={link.name}
